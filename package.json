@@ -37,8 +37,10 @@
   "homepage": "https://github.com/maxwelltrack/acquisitions#readme",
   "description": "",
   "dependencies": {
+    "@arcjet/inspect": "^1.0.0-beta.13",
+    "@arcjet/node": "^1.0.0-beta.13",
     "@neondatabase/serverless": "^1.0.2",
-    "bcryptjs": "^3.0.2",
+    "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -52,7 +54,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
-    "drizzle-kit": "^0.18.1",
+    "drizzle-kit": "^0.31.5",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
