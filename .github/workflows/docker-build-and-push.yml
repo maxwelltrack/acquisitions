@@ -36,7 +36,7 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          
+
       # Add a verification step to ensure login was successful
       - name: Verify Docker Hub Login
         run: |

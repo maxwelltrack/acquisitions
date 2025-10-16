@@ -33,18 +33,27 @@ export default [
     },
   },
   {
-    files: ['tests/**/*.js'],
+    files: ['src/tests/**/*.js', 'tests/**/*.js'],
     languageOptions: {
       globals: {
+        // Jest globals
         describe: 'readonly',
         it: 'readonly',
+        test: 'readonly',
         expect: 'readonly',
         beforeEach: 'readonly',
         afterEach: 'readonly',
         beforeAll: 'readonly',
         afterAll: 'readonly',
         jest: 'readonly',
+        spyOn: 'readonly',
+        fail: 'readonly',
       },
+    },
+    rules: {
+      // Test-specific rules
+      'no-console': 'off',
+      'max-len': 'off',
     },
   },
   {
