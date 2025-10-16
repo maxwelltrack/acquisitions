@@ -23,11 +23,11 @@ jobs:
       - name: Validate Secrets
         run: |
           if [ -z "${{ secrets.DOCKER_USERNAME }}" ]; then
-            echo "::error::DOCKER_USERNAME secret is not set. Please configure it in GitHub Secrets."
+            echo "DOCKER_USERNAME secret is not set. Please configure it in GitHub Secrets."
             exit 1
           fi
           if [ -z "${{ secrets.DOCKER_PASSWORD }}" ]; then
-            echo "::error::DOCKER_PASSWORD secret is not set. Please configure it in GitHub Secrets."
+            echo "DOCKER_PASSWORD secret is not set. Please configure it in GitHub Secrets."
             exit 1
           fi
           echo "Docker credentials validation passed"
@@ -107,12 +107,3 @@ jobs:
           echo '```bash' >> $GITHUB_STEP_SUMMARY
           echo 'docker pull docker.io/${{ secrets.DOCKER_USERNAME }}/acquisitions-app:latest' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-
-      - name: Build failure notification
-        if: failure()
-        run: |
-          echo "::error::Docker build failed - please check the build logs above for details"
-          echo "::notice::Ensure your Dockerfile is properly configured and secrets are set correctly"
-          echo "::notice::Verify that your DOCKER_USERNAME and DOCKER_PASSWORD secrets are correctly set in GitHub Actions"
-          echo "::notice::Make sure your Docker Hub personal access token has read/write permissions for repositories"
-          echo "::notice::The image name should be in the format: docker.io/username/repository-name"
