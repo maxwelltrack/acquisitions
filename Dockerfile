@@ -39,4 +39,16 @@ CMD ["npm", "run", "dev"]
 
 # Production stage
 FROM base AS production
+# Add build arguments
+ARG NODE_ENV=production
+ARG BUILD_DATE
+ARG GIT_SHA
+ARG GIT_REF
+
+# Set environment variables
+ENV NODE_ENV=$NODE_ENV
+ENV BUILD_DATE=$BUILD_DATE
+ENV GIT_SHA=$GIT_SHA
+ENV GIT_REF=$GIT_REF
+
 CMD ["npm", "start"]
