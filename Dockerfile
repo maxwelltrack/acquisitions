@@ -51,4 +51,7 @@ ENV BUILD_DATE=$BUILD_DATE
 ENV GIT_SHA=$GIT_SHA
 ENV GIT_REF=$GIT_REF
 
+# Create logs directory
+RUN mkdir -p /app/logs
+
 CMD ["npm", "start"]

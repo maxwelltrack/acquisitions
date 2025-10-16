@@ -13,16 +13,33 @@ on:
 
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/acquisitions-app
+  # Use a default value if DOCKER_USERNAME is not set
+  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME || 'acquisitions-app' }}
 
 jobs:
   build-and-push:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
+    # Add environment validation
+    env:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Validate Secrets
+        run: |
+          if [ -z "${{ secrets.DOCKER_USERNAME }}" ]; then
+            echo "::error::DOCKER_USERNAME secret is not set. Please configure it in GitHub Secrets."
+            exit 1
+          fi
+          if [ -z "${{ secrets.DOCKER_PASSWORD }}" ]; then
+            echo "::error::DOCKER_PASSWORD secret is not set. Please configure it in GitHub Secrets."
+            exit 1
+          fi
+          echo "Docker credentials validation passed"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -37,20 +54,18 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Add a verification step to ensure login was successful
       - name: Verify Docker Hub Login
         run: |
           echo "Verifying Docker Hub login..."
           echo "REGISTRY: $REGISTRY"
-          echo "IMAGE_NAME: $IMAGE_NAME"
-          # This will fail if login was unsuccessful
+          echo "IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/acquisitions-app"
           echo "Login verification complete"
 
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/acquisitions-app
           tags: |
             # Branch-based tags
             type=ref,event=branch
@@ -91,7 +106,7 @@ jobs:
           echo "## Docker Build Summary 🐳" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Published Image" >> $GITHUB_STEP_SUMMARY
-          echo "**Image:** \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Image:** \`${{ env.REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/acquisitions-app\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Tags Published" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
@@ -106,7 +121,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Usage" >> $GITHUB_STEP_SUMMARY
           echo '```bash' >> $GITHUB_STEP_SUMMARY
-          echo 'docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest' >> $GITHUB_STEP_SUMMARY
+          echo 'docker pull ${{ env.REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/acquisitions-app:latest' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Build failure notification
@@ -116,3 +131,4 @@ jobs:
           echo "::notice::Ensure your Dockerfile is properly configured and secrets are set correctly"
           echo "::notice::Verify that your DOCKER_USERNAME and DOCKER_PASSWORD secrets are correctly set in GitHub Actions"
           echo "::notice::Make sure your Docker Hub personal access token has read/write permissions for repositories"
+          echo "::notice::The image name should be in the format: username/repository-name"
