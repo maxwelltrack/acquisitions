@@ -19,3 +19,13 @@
 {"level":"info","message":"::1 - - [13/Oct/2025:03:37:57 +0000] \"GET /health HTTP/1.1\" 403 68 \"-\" \"PostmanRuntime/7.48.0\"","service":"acquisitions-api"}
 {"ip":"::1","level":"warn","message":"Bot request blocked","path":"/health","service":"acquisitions-api","userAgent":"PostmanRuntime/7.48.0"}
 {"level":"info","message":"::1 - - [13/Oct/2025:03:38:00 +0000] \"GET /health HTTP/1.1\" 403 68 \"-\" \"PostmanRuntime/7.48.0\"","service":"acquisitions-api"}
+{"level":"info","message":"Hello from Acquisitions!","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [16/Oct/2025:10:46:01 +0000] \"GET / HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0\"","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [16/Oct/2025:10:46:02 +0000] \"GET /favicon.ico HTTP/1.1\" 404 27 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0\"","service":"acquisitions-api"}
+{"level":"info","message":"Hello from Acquisitions!","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [16/Oct/2025:10:59:00 +0000] \"GET / HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0\"","service":"acquisitions-api"}
+{"ip":"::ffff:172.20.0.1","level":"warn","message":"Bot request blocked","path":"/health","service":"acquisitions-api","userAgent":"PostmanRuntime/7.48.0"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [16/Oct/2025:10:59:08 +0000] \"GET /health HTTP/1.1\" 403 68 \"-\" \"PostmanRuntime/7.48.0\"","service":"acquisitions-api"}
+{"ip":"::ffff:172.20.0.1","level":"warn","message":"Bot request blocked","path":"/auth/sign-up","service":"acquisitions-api","userAgent":"PostmanRuntime/7.48.0"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [16/Oct/2025:10:59:49 +0000] \"POST /auth/sign-up HTTP/1.1\" 403 68 \"-\" \"PostmanRuntime/7.48.0\"","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [16/Oct/2025:11:06:59 +0000] \"GET /users HTTP/1.1\" 404 27 \"http://localhost:3000/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0\"","service":"acquisitions-api"}
